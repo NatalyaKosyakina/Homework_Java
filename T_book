@@ -1,0 +1,52 @@
+package org.example;
+
+import java.util.*;
+/*Реализуйте структуру телефонной книги с помощью HashMap, учитывая, что 1 человек может иметь несколько телефонов.
+Нужны методы добавления новой записи в книгу и метод поиска записей в телефонной книге*/
+public class T_book {
+    private HashMap<String, List<String>> t_book = new HashMap<>();
+    // Добавление нового номера
+    void add(String name, String number){
+        if (t_book.containsKey(name)){
+            if (!t_book.get(name).contains(number)) {
+                List<String> list = t_book.get(name);
+                list.add(number);
+            }
+        }
+        else{
+            List<String> list = new ArrayList<>();
+            list.add(number);
+            t_book.put(name, list);
+        }
+    }
+    // Поиск номера по имени
+    String getNumber(String name){
+        if (t_book.containsKey(name)){
+            return name + " : " + t_book.get(name).toString();
+        } else {
+            return "Контакт не найден";
+        }
+    }
+    // Поиск имени по номеру
+    List<String> getName(String number){
+//        Set<Map.Entry<String, List<String>>> entrySet = t_book.entrySet();
+        List<String> result = new ArrayList<>();
+        for (Map.Entry<String, List<String>> pair : t_book.entrySet()) {
+            if (pair.getValue().contains(number)) {
+                result.add(pair.getKey());// нашли наше значение и возвращаем  ключ
+            }
+        }
+        return result;
+    }
+    // Вывод всей книги в консоль
+    void printAllBook() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Map.Entry<String, List<String>> entry : t_book.entrySet()) {
+            stringBuilder.append(entry.getKey());
+            stringBuilder.append(": ");
+            stringBuilder.append(entry.getValue().toString());
+            stringBuilder.append("\n");
+        }
+        System.out.println(stringBuilder);
+    }
+}
