@@ -1,0 +1,18 @@
+package org.example;
+
+public class Main {
+    public static void main(String[] args) {
+        T_book tel_book = new T_book();
+        tel_book.add("Чапаев", "987854");
+        tel_book.add("Анка", "951753");
+        tel_book.add("Чапаев", "555177");
+        tel_book.add("Петька", "123456");
+
+        System.out.println(tel_book.getNumber("Чапаев"));
+        System.out.println();
+
+        System.out.println(tel_book.getName("123456"));
+
+        tel_book.printAllBook();
+    }
+}
